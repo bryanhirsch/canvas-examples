@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="578" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var imageObj = new Image();
+
+      var clickCount = 0;
+      var images = [
+        'darth.png',
+        'red-dot.png',
+        'blue-dot.png'
+      ];
+
+      imageObj.onload = function() {
+        context.drawImage(imageObj, 69, 50);
+      };
+      imageObj.src = 'darth.png';
+
+      canvas.onclick = function() {
+        clickCount++;
+        (clickCount < images.length) ? addImages() : removeImages();
+
+        function addImages() {
+          context.drawImage(imageObj, 69, 50);
+          context.globalAlpha = 1;
+          context.globalCompositeOperation = 'source-over';
+          imageObj.src = images[clickCount];
+        }
+
+        function removeImages() {
+          imageObj.src = images[0];
+          clickCount = 0;
+        }
+
+      };
+    </script>
+  </body>
+</html>    
